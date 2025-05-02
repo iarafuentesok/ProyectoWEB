@@ -9,17 +9,22 @@ let tiempoInicio;
 let tiempos= [];
 let preguntas = [];
 
+// Espera a que todo el contenido del DOM esté cargado
 document.addEventListener("DOMContentLoaded", async() => {
     const nombreInput = document.getElementById("nombre-jugador");
     const btnEmpezar = document.getElementById("btn-empezar");
+    btnEmpezar.disabled = true;
     const pantallaInicio = document.getElementById("pantalla-inicio");
     const main = document.querySelector("main");
     let nombreJugador = "";
+    
+    //habilito boton
   
     nombreInput.addEventListener("input", () => {
       btnEmpezar.disabled = nombreInput.value.trim() === "";
     });
-  
+    
+    //valido y comienza el juego
     document.getElementById("form-inicio").addEventListener("submit", (e) => {
       e.preventDefault();
       const nombre = nombreInput.value.trim();
@@ -42,14 +47,67 @@ document.addEventListener("DOMContentLoaded", async() => {
       actual=0;
       mostrarPregunta();
     });
-});
-    paises = await fetch(URL_API).then(res => res.json());
 
+    paises = await fetch(URL_API).then(res => res.json());
+    generarPreguntas();
+    mostrarPregunta();
     document.getElementById("siguiente-btn").addEventListener("click", mostrarPregunta);
     document.getElementById("reiniciar-btn").addEventListener("click", reiniciarJuego);
     cargarRanking();
  
+    function generarPreguntas() {
+      preguntas = [];
+      for (let i = 0; i < 10; i++) {
+        const tipo = i % 3;
+        preguntas.push(generarPregunta(tipo));
+      }
+    }
   
+    function generarPregunta(tipo) {
+      const pais = paises[Math.floor(Math.random() * paises.length)];
+      let opciones = [];
+      let correcta = "";
+  
+      switch (tipo) {
+        case 0: // Capital → País
+          correcta = pais.name.common;
+          opciones = obtenerOpciones(correcta, pais => pais.name.common);
+          return {
+            texto: `¿Cuál es el país de la capital "${pais.capital?.[0] || 'Desconocida'}"?`,
+            opciones,
+            respuesta: correcta,
+            puntos: 3,
+            tipo: "capital"
+          };
+  
+        case 1: // Bandera → País
+          correcta = pais.name.common;
+          opciones = obtenerOpciones(correcta, pais => pais.name.common);
+          return {
+            texto: `¿A qué país pertenece esta bandera?`,
+            opciones,
+            respuesta: correcta,
+            bandera: pais.flags.svg,
+            puntos: 5,
+            tipo: "bandera"
+          };
+  
+        case 2: // País → cantidad de fronteras
+          const cantidad = pais.borders?.length || 0;
+          correcta = cantidad.toString();
+          opciones = obtenerOpciones(correcta, p => (p.borders?.length || 0).toString());
+          return {
+            texto: `¿Cuántos países limítrofes tiene ${pais.name.common}?`,
+            opciones,
+            respuesta: correcta,
+            puntos: 3,
+            tipo: "fronteras"
+          };
+      }
+    }
+  
+});
+
 
 // async function obtenerDatos() {
 //   try {
