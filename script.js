@@ -39,8 +39,16 @@ document.addEventListener("DOMContentLoaded", async() => {
       document.getElementById("juego").style.display = "block";
   
       generarPreguntas(); 
+      actual=0;
+      mostrarPregunta();
     });
-  });
+});
+    paises = await fetch(URL_API).then(res => res.json());
+
+    document.getElementById("siguiente-btn").addEventListener("click", mostrarPregunta);
+    document.getElementById("reiniciar-btn").addEventListener("click", reiniciarJuego);
+    cargarRanking();
+ 
   
 
 // async function obtenerDatos() {
