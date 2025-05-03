@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return Array.from(opciones).sort(() => Math.random() - 0.5); //mezcla opciones
   }
   function mostrarPregunta() {
-    if (actual >= preguntas.length) return;
+    if (actual >= preguntas.length) return mostrarResultados();
 
     const pregunta = preguntas[actual];
     const contenedor = document.getElementById("pregunta-texto");
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     contenedor.textContent = pregunta.texto;
     opcionesDiv.innerHTML = "";
     feedback.textContent = "";
-    
+    siguienteBtn.style.display = "none";
 
     if (pregunta.tipo === "bandera") {
       bandera.src = pregunta.bandera;
@@ -180,63 +180,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("siguiente-btn").style.display = "inline-block";
     actual++;
   }
+  function mostrarResultados() {
+    const totalTiempo = tiempos.reduce((a, b) => a + b, 0) / 1000;
+    const promedio = totalTiempo / preguntas.length;
+  
+    document.getElementById("juego").style.display = "none";
+    document.getElementById("resultado").style.display = "block";
+  
+    document.getElementById("correctas").textContent = correctas;
+    document.getElementById("incorrectas").textContent = incorrectas;
+    document.getElementById("puntaje").textContent = puntaje;
+    document.getElementById("tiempo-total").textContent = totalTiempo.toFixed(2);
+    document.getElementById("tiempo-promedio").textContent = promedio.toFixed(2);
+  }
+  function reiniciarJuego() {
+    actual = 0;
+    correctas = 0;
+    incorrectas = 0;
+    tiempos = [];
+    puntaje = 0;
+  
+    document.getElementById("resultado").style.display = "none";
+    document.getElementById("juego").style.display = "none";
+    pantallaInicio.style.display = "block";
+    main.style.display = "none";
+  
+    document.getElementById("nombre-jugador").value = "";
+    document.getElementById("btn-empezar").disabled = true;
+  }
 });
 
-// async function obtenerDatos() {
-//   try {
-//     const respuesta = await fetch("https://restcountries.com/v3.1/all");
-//     const data = await respuesta.json();
-//     datosPaises = data;
-//     mostrarPreguntaCapital();
-//   } catch (error) {
-//     console.error("Error al obtener datos de países:", error);
-//   }
-// }
-
-// function mostrarPreguntaCapital() {
-//   const paisAleatorio = datosPaises[Math.floor(Math.random() * datosPaises.length)];
-//   const capital = paisAleatorio.capital?.[0];
-//   const nombreCorrecto = paisAleatorio.name.common;
-
-//   if (!capital) {
-//     mostrarPreguntaCapital(); // Intenta con otro país si no tiene capital
-//     return;
-//   }
-
-//   const opciones = [nombreCorrecto];
-//   while (opciones.length < 4) {
-//     const otroPais = datosPaises[Math.floor(Math.random() * datosPaises.length)].name.common;
-//     if (!opciones.includes(otroPais)) {
-//       opciones.push(otroPais);
-//     }
-//   }
-
-//   opciones.sort(() => Math.random() - 0.5);
-
-//   const pregunta = `¿Cuál es el país de la siguiente ciudad capital: ${capital}?`;
-//   document.getElementById("pregunta").textContent = pregunta;
-
-//   const contenedorOpciones = document.getElementById("opciones");
-//   contenedorOpciones.innerHTML = "";
-
-//   opciones.forEach(opcion => {
-//     const boton = document.createElement("button");
-//     boton.textContent = opcion;
-//     boton.onclick = () => {
-//       if (opcion === nombreCorrecto) {
-//         alert("¡Correcto!");
-//       } else {
-//         alert(`Incorrecto. La respuesta correcta era ${nombreCorrecto}.`);
-//       }
-//       document.getElementById("siguiente").style.display = "block";
-//     };
-//     contenedorOpciones.appendChild(boton);
-//   });
-
-//   document.getElementById("siguiente").onclick = () => {
-//     document.getElementById("siguiente").style.display = "none";
-//     mostrarPreguntaCapital();
-//   };
-// }
-
-// obtenerDatos();
