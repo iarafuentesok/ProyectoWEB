@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const errorSpan = document.getElementById("error-nombre");
 
     if (nombre.length < 3) {
-      errorSpan.textContent = "El nombre debe tener al menos 3 caracteres.";
+      errorSpan.textContent = "El nombre debe tener 3 caracteres o mas.";
       errorSpan.style.display = "inline";
       return;
     }
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     main.style.display = "block";
     document.getElementById("resultado").style.display = "none";
     document.getElementById("juego").style.display = "block";
-
+    
     generarPreguntas();
     actual = 0;
     mostrarPregunta();
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return Array.from(opciones).sort(() => Math.random() - 0.5); //mezcla opciones
   }
   function mostrarPregunta() {
-    if (actual >= preguntas.length) return mostrarResultados();
+    if (actual >= preguntas.length) return mostrarResultados(); //si no hay preguntas muestra resultado
 
     const pregunta = preguntas[actual];
     const contenedor = document.getElementById("pregunta-texto");
@@ -154,18 +154,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       opcionesDiv.appendChild(btn);
     });
 
-    tiempoInicio = Date.now();
+    tiempoInicio = Date.now(); //cuenta el tiempo de la pregunta
   }
 
   function responder(elegida) {
     const pregunta = preguntas[actual];
     const tiempo = Date.now() - tiempoInicio;
-    tiempos.push(tiempo);
+    tiempos.push(tiempo); //esto guarda el tiempo 
     const feedback = document.getElementById("feedback");
     const botones = document.querySelectorAll(".opcion");
 
-    botones.forEach(btn => btn.disabled = true);
-
+    botones.forEach(btn => btn.disabled = true); //desactiva botones para que no se pueda elegir mas de uno
+    //comparo respuesta con la correcta y si esta bien sumo puntos, sino se muestra la opcion correcta.
     if (elegida === pregunta.respuesta) {
       correctas++;
       puntaje += pregunta.puntos;
@@ -178,9 +178,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     document.getElementById("siguiente-btn").style.display = "inline-block";
-    actual++;
+    actual++; //con esto pasa a la otra pregunta
   }
   function mostrarResultados() {
+    //si termina el juego, suma el tiempo y saca promedio.
     const totalTiempo = tiempos.reduce((a, b) => a + b, 0) / 1000;
     const promedio = totalTiempo / preguntas.length;
   
@@ -192,8 +193,51 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("puntaje").textContent = puntaje;
     document.getElementById("tiempo-total").textContent = totalTiempo.toFixed(2);
     document.getElementById("tiempo-promedio").textContent = promedio.toFixed(2);
+
+    guardarPartida(puntaje, totalTiempo, promedio);
   }
+
+  function guardarPartida(puntaje, totalTiempo, promedio) {
+    //guardo todos los datos
+    const datos = {
+      jugador: nombreJugador,
+      puntaje,
+      correctas,
+      incorrectas,
+      tiempo: totalTiempo.toFixed(2),
+      promedio: promedio.toFixed(2)
+    };
+    //mando un json al servidor con los datos y cargo el ranking actualizado
+    fetch('/partida', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos)
+    }).then(() => cargarRanking()); //con esto carga el ranking 
+  }
+  function cargarRanking() {
+    //se hace peticion al "backend" del ranking, creo fila en mi html y se muestra en tabla
+    fetch('/ranking')
+      .then(res => res.json())
+      .then(data => {
+        const tabla = document.getElementById("tabla-ranking");
+        tabla.innerHTML = "";
+        data.forEach(partida => {
+          const fila = document.createElement("tr");
+          fila.innerHTML = `
+            <td>${partida.jugador}</td>
+            <td>${partida.puntaje}</td>
+            <td>${partida.correctas}</td>
+            <td>${partida.incorrectas}</td>
+            <td>${partida.tiempo}s</td>
+            <td>${partida.promedio}s</td>
+          `;
+          tabla.appendChild(fila);
+        });
+      });
+  }
+
   function reiniciarJuego() {
+    //vuelvo todo a 0
     actual = 0;
     correctas = 0;
     incorrectas = 0;
@@ -206,7 +250,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     main.style.display = "none";
   
     document.getElementById("nombre-jugador").value = "";
-    document.getElementById("btn-empezar").disabled = true;
+    document.getElementById("btn-empezar").disabled = true; //dejo esto deshabilitado
   }
 });
 
