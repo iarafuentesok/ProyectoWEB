@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   
     document.getElementById("resultado").style.display = "none";
     document.getElementById("juego").style.display = "none";
-    pantallaInicio.style.display = "block";
+    pantallaInicio.style.display = "flex";
     main.style.display = "none";
   
     document.getElementById("nombre-jugador").value = "";

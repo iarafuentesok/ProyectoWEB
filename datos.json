@@ -1,1 +1,106 @@
-[]
+[
+  {
+    "jugador": "pepe",
+    "puntaje": 10,
+    "correctas": 2,
+    "incorrectas": 8,
+    "tiempo": "15.57",
+    "promedio": "1.56"
+  },
+  {
+    "jugador": "pipe",
+    "puntaje": 17,
+    "correctas": 5,
+    "incorrectas": 5,
+    "tiempo": "15.04",
+    "promedio": "1.50"
+  },
+  {
+    "jugador": "lili",
+    "puntaje": 19,
+    "correctas": 5,
+    "incorrectas": 5,
+    "tiempo": "10.71",
+    "promedio": "1.07"
+  },
+  {
+    "jugador": "iara",
+    "puntaje": 20,
+    "correctas": 6,
+    "incorrectas": 4,
+    "tiempo": "13.55",
+    "promedio": "1.35"
+  },
+  {
+    "jugador": "mia",
+    "puntaje": 18,
+    "correctas": 6,
+    "incorrectas": 4,
+    "tiempo": "12.08",
+    "promedio": "1.21"
+  },
+  {
+    "jugador": "mati",
+    "puntaje": 13,
+    "correctas": 3,
+    "incorrectas": 7,
+    "tiempo": "11.54",
+    "promedio": "1.15"
+  },
+  {
+    "jugador": "paula",
+    "puntaje": 3,
+    "correctas": 1,
+    "incorrectas": 9,
+    "tiempo": "14.03",
+    "promedio": "1.40"
+  },
+  {
+    "jugador": "maru",
+    "puntaje": 14,
+    "correctas": 4,
+    "incorrectas": 6,
+    "tiempo": "42.85",
+    "promedio": "4.29"
+  },
+  {
+    "jugador": "pilar",
+    "puntaje": 11,
+    "correctas": 3,
+    "incorrectas": 7,
+    "tiempo": "24.84",
+    "promedio": "2.48"
+  },
+  {
+    "jugador": "gina",
+    "puntaje": 14,
+    "correctas": 4,
+    "incorrectas": 6,
+    "tiempo": "24.07",
+    "promedio": "2.41"
+  },
+  {
+    "jugador": "sofi",
+    "puntaje": 8,
+    "correctas": 2,
+    "incorrectas": 8,
+    "tiempo": "23.98",
+    "promedio": "2.40"
+  },
+  {
+    "jugador": "lucia",
+    "puntaje": 18,
+    "correctas": 6,
+    "incorrectas": 4,
+    "tiempo": "27.19",
+    "promedio": "2.72"
+  },
+  {
+    "jugador": "luz",
+    "puntaje": 22,
+    "correctas": 6,
+    "incorrectas": 4,
+    "tiempo": "22.55",
+    "promedio": "2.26"
+  }
+]
