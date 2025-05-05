@@ -102,5 +102,21 @@
     "incorrectas": 4,
     "tiempo": "22.55",
     "promedio": "2.26"
+  },
+  {
+    "jugador": "maria",
+    "puntaje": 11,
+    "correctas": 3,
+    "incorrectas": 7,
+    "tiempo": "13.88",
+    "promedio": "1.39"
+  },
+  {
+    "jugador": "virginia",
+    "puntaje": 14,
+    "correctas": 4,
+    "incorrectas": 6,
+    "tiempo": "10.41",
+    "promedio": "1.04"
   }
 ]

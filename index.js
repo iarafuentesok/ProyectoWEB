@@ -5,7 +5,7 @@ const fs = require('fs');
 
 // Crear aplicación Express
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Ruta al archivo de ranking
 const RANKING_FILE = path.join(__dirname, 'datos.json');
@@ -105,7 +105,7 @@ app.post('/partida', (req, res) => {
 
 // Iniciar servidor
 app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
+  console.log(`Servidor corriendo en http://localhost:${port}`);
   console.log(`Archivos públicos desde: ${path.join(__dirname, 'public')}`);
 
   // Crear archivo datos.json si no existe
