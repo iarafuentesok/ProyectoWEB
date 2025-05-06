@@ -102,12 +102,6 @@ app.post('/partida', (req, res) => {
     });
   });
 });
-
-// Iniciar servidor
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
-  console.log(`Archivos públicos desde: ${path.join(__dirname, 'public')}`);
-
   // Crear archivo datos.json si no existe
   if (!fs.existsSync(RANKING_FILE)) {
     console.log('Creando archivo datos.json vacío.');
@@ -118,4 +112,10 @@ app.listen(port, () => {
       console.error('Error al crear datos.json:', err);
     }
   }
+// Iniciar servidor
+app.listen(port, () => {
+  console.log(`Servidor corriendo en http://localhost:${port}`);
+  console.log(`Archivos públicos desde: ${path.join(__dirname, 'public')}`);
+
+
 });
