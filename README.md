@@ -51,4 +51,4 @@ US6: Puedo acceder a un ranking de las mejores 20 partidas ordenados por puntaje
 Enlaces importantes
 • 🔗 [Respositorio en Github](https://github.com/iarafuentesok/ProyectoWEB.git)
 • 🌐 [Aplicacion en vivo](https://proyectoweb-r1ok.onrender.com/)
-• 🎥 Video de demostración
+• 🎥 [Video de demostración](https://www.youtube.com/watch?v=7w9HDROgn80&ab_channel=IaraNievas)
