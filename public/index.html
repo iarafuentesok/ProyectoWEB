@@ -10,18 +10,22 @@
     <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body>
+    <!-- Encabezado -->
     <header>
       <h1>Juego de Países</h1>
       <p>Responde las preguntas y compara tus conocimientos en el ranking</p>
     </header>
-
+    <!-- Pantalla inicio -->
     <section id="pantalla-inicio" class="pantalla-inicio">
       <div class="inicio-contenedor">
         <h2>Bienvenido al Juego de Países</h2>
+        <!-- Formulario en donde ponen el nombre -->
         <form id="form-inicio">
+          <!-- Label oculto que sirve para accesibilidad -->
           <label for="nombre-jugador" style="display: none"
             >Nombre del jugador:</label
           >
+          <!-- Input para el nombre -->
           <input
             type="text"
             id="nombre-jugador"
@@ -29,7 +33,9 @@
             placeholder="Ingresa tu nombre"
             required
           />
+          <!-- Error si ingresan nombre no valido -->
           <span id="error-nombre" style="color: red; display: none"></span>
+          <!-- Boton de inicio, esta desahibilitado hasta que ingresen un nombre -->
           <button type="submit" id="btn-empezar" disabled>
             Empezar a jugar
           </button>
@@ -41,15 +47,20 @@
     <main>
       <section id="juego" class="visible">
         <div id="pregunta-container">
+          <!-- Aca muestra cada pregunta -->
           <h2 id="pregunta-texto">Cargando pregunta...</h2>
+          <!-- Imagen bandera -->
           <img
             id="bandera"
             src=""
             alt="Bandera"
             style="display: none; max-width: 200px"
           />
+          <!-- Opciones -->
           <div id="opciones" class="opciones"></div>
+          <!-- muestra si es cor o incor -->
           <div id="feedback" class="feedback"></div>
+          <!-- Boton de siguiente -->
           <button id="siguiente-btn" style="display: none">
             Siguiente pregunta
           </button>
@@ -70,6 +81,7 @@
           <strong>Tiempo promedio:</strong>
           <span id="tiempo-promedio"></span> segundos por pregunta
         </p>
+        <!-- boton reinicio -->
         <button id="reiniciar-btn">Jugar otra vez</button>
       </section>
       <section id="ranking" class="visible">
