@@ -55,14 +55,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   //botones
   document
     .getElementById("siguiente-btn")
-    .addEventListener("click", mostrarPregunta);
+    .addEventListener("click", mostrarPregunta); //si se clickea siguiente muestra la otra pregunta
   document
     .getElementById("reiniciar-btn")
-    .addEventListener("click", reiniciarJuego);
+    .addEventListener("click", reiniciarJuego); //si se clickea reiniciar vuelve a la pantalla de inicio
   cargarRanking();
 
   function generarPreguntas() {
-    preguntas = [];
+    preguntas = []; //vaciamos el array
     for (let i = 0; i < 10; i++) {
       const tipo = i % 3; //esto alterna entre 0, 1 y 2
       preguntas.push(generarPregunta(tipo));
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function generarPregunta(tipo) {
-    const pais = paises[Math.floor(Math.random() * paises.length)];
+    const pais = paises[Math.floor(Math.random() * paises.length)]; //eleccion de pais al azar
     let opciones = [];
     let correcta = "";
 
@@ -134,18 +134,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     const feedback = document.getElementById("feedback");
     const siguienteBtn = document.getElementById("siguiente-btn");
 
-    contenedor.textContent = pregunta.texto;
-    opcionesDiv.innerHTML = "";
-    feedback.textContent = "";
-    siguienteBtn.style.display = "none";
+    contenedor.textContent = pregunta.texto; //se muestra la pregunta
+    opcionesDiv.innerHTML = ""; //se limpia opciones
+    feedback.textContent = ""; //se limpia devolucion anterior 
+    siguienteBtn.style.display = "none"; //oculto este boton si el usuario todavia no respondio
 
     if (pregunta.tipo === "bandera") {
-      bandera.src = pregunta.bandera;
+      bandera.src = pregunta.bandera; //se muestra bandera
       bandera.style.display = "block";
     } else {
-      bandera.style.display = "none";
+      bandera.style.display = "none"; //si no es se oculta
     }
-
+    //cada opcion se vuelve un boton
     pregunta.opciones.forEach(op => {
       const btn = document.createElement("button");
       btn.textContent = op;
@@ -154,12 +154,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       opcionesDiv.appendChild(btn);
     });
 
-    tiempoInicio = Date.now(); //cuenta el tiempo de la pregunta
+    tiempoInicio = Date.now(); //marca el tiempo de inicio de la pregunta
   }
 
+  //esta es mi funcion auxiliar que se ejecuta al hacer clic en una respuesta
   function responder(elegida) {
     const pregunta = preguntas[actual];
-    const tiempo = Date.now() - tiempoInicio;
+    const tiempo = Date.now() - tiempoInicio; //se hace el caculo de cuanto tardo
     tiempos.push(tiempo); //esto guarda el tiempo 
     const feedback = document.getElementById("feedback");
     const botones = document.querySelectorAll(".opcion");
@@ -182,18 +183,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   function mostrarResultados() {
     //si termina el juego, suma el tiempo y saca promedio.
-    const totalTiempo = tiempos.reduce((a, b) => a + b, 0) / 1000;
-    const promedio = totalTiempo / preguntas.length;
+    const totalTiempo = tiempos.reduce((a, b) => a + b, 0) / 1000; //esto suma todos los tiempos y los vuelve segundos
+    const promedio = totalTiempo / preguntas.length; //con esto se calcula el tiempo promedio
   
     document.getElementById("juego").style.display = "none";
     document.getElementById("resultado").style.display = "block";
   
+    //se cargan datos finales en el html
     document.getElementById("correctas").textContent = correctas;
     document.getElementById("incorrectas").textContent = incorrectas;
     document.getElementById("puntaje").textContent = puntaje;
     document.getElementById("tiempo-total").textContent = totalTiempo.toFixed(2);
     document.getElementById("tiempo-promedio").textContent = promedio.toFixed(2);
-
+    //mandamos la partida la servidor para guardar el ranking
     guardarPartida(puntaje, totalTiempo, promedio);
   }
 
@@ -220,7 +222,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       .then(res => res.json())
       .then(data => {
         const tabla = document.getElementById("tabla-ranking");
-        tabla.innerHTML = "";
+        tabla.innerHTML = ""; //limpiamos tabla
         data.forEach(partida => {
           const fila = document.createElement("tr");
           fila.innerHTML = `
@@ -231,7 +233,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <td>${partida.tiempo}s</td>
             <td>${partida.promedio}s</td>
           `;
-          tabla.appendChild(fila);
+          tabla.appendChild(fila); //agrego fila 
         });
       });
   }
@@ -243,12 +245,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     incorrectas = 0;
     tiempos = [];
     puntaje = 0;
-  
+    //oculto resultado y el juego 
     document.getElementById("resultado").style.display = "none";
     document.getElementById("juego").style.display = "none";
+    //volvemos a mostrar pantalla de inicio
     pantallaInicio.style.display = "flex";
     main.style.display = "none";
-  
+    //vacio input del nombre
     document.getElementById("nombre-jugador").value = "";
     document.getElementById("btn-empezar").disabled = true; //dejo esto deshabilitado
   }
