@@ -190,35 +190,119 @@ img#bandera {
 
 /* Responsive */
 @media screen and (max-width: 600px) {
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+
+  body {
+    padding: 0;
+  }
+
+  .pantalla-inicio {
+    height: 140vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+    background: url('mapamundi.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  header {
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 5rem;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  .inicio-contenedor {
+    width: 900px;
+    height: 600px;
+    max-width: 6000px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 50px 25px;
+    font-size: 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inicio-contenedor h2 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+
+  .inicio-contenedor input {
+    width: 100%;
+    font-size: 3rem;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+  }
+
+  .inicio-contenedor button {
+    width: 100%;
+    font-size: 18px;
+    padding: 14px;
+    border-radius: 10px;
+  }
+
   main {
     padding: 15px;
     width: 100%;
   }
 
+  .opcion {
+    flex: 1 1 100%;
+    font-size: 1.1rem;
+    padding: 16px;
+  }
+
+  #pregunta-texto {
+    font-size: 1.2rem;
+  }
+
+  #feedback {
+    font-size: 1rem;
+    text-align: center;
+  }
+
   table {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  th, td {
+    padding: 6px;
   }
 
   #siguiente-btn,
   #reiniciar-btn {
     width: 100%;
     max-width: 300px;
-  }
-  .opcion {
-    flex: 1 1 100%;
-  }
-
-  .inicio-contenedor {
-    padding: 40px;
-    font-size: 24px;
+    font-size: 1rem;
+    padding: 12px;
   }
 
-  .inicio-contenedor input {
-    width: 200px;
-  }
-  .pantalla-inicio {
-    align-items: center;
-    padding-top: 0;
-    padding-bottom: 0;
+  img#bandera {
+    max-height: 120px;
   }
 }
