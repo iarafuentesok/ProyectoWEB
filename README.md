@@ -27,6 +27,8 @@ Tecnologías utilizadas
 • Front-end: HTML, CSS y JavaScript (sin frameworks)
 • API: ([REST Contruies](https://restcountries.com/))
 • Deploy: servidor real en Internet
+🕒 Nota: Esta aplicación está alojada en Render (plan gratuito).
+La app puede demorar unos segundos en cargar si estuvo inactiva, ya que Render duerme las instancias gratuitas como la que estoy usando, intentar recargar despues de 50 segundos.
 
 Dependencias y versiones utilizadas
 • Node.js: v22.15.0 (versión utilizada para desarrollo y pruebas)
