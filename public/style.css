@@ -216,4 +216,9 @@ img#bandera {
   .inicio-contenedor input {
     width: 200px;
   }
+  .pantalla-inicio {
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
